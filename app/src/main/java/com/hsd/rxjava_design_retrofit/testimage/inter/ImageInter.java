@@ -13,4 +13,7 @@ import rx.Observable;
 public interface ImageInter {
     @GET
     Observable<ResponseBody> getBitmap(@Url String url);
+
+    @GET
+    Observable<Bitmap> getBitmap2(@Url String url);
 }

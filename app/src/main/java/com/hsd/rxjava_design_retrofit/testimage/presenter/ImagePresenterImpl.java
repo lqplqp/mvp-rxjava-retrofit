@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.hsd.rxjava_design_retrofit.testimage.ImageAll;
 import com.hsd.rxjava_design_retrofit.testimage.model.ImageModelImpl;
+import com.hsd.rxjava_design_retrofit.testimage.model.MyObserver;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -32,20 +33,27 @@ public class ImagePresenterImpl implements ImageAll.ImagePresenter {
 
     @Override
     public void loadImage() {
+//        mMoudle.getBitmap("http://i2.17173cdn.com/2fhnvk/YWxqaGBf/cms3/fADFcjbkCbwrcch.jpg/")
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<Bitmap>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        Log.i(TAG, "onCompleted2");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        e.printStackTrace();
+//                        Log.i(TAG, "onError2");
+//                    }
+//
+//                    @Override
+//                    public void onNext(Bitmap bitmap) {
+//                        mActivity.updateRecycleView(bitmap);
+//                    }
+//                });
         mMoudle.getBitmap("http://i2.17173cdn.com/2fhnvk/YWxqaGBf/cms3/fADFcjbkCbwrcch.jpg/")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Bitmap>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i(TAG, "onCompleted2");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        Log.i(TAG, "onError2");
-                    }
-
+                .subscribe(new MyObserver<Bitmap>() {
                     @Override
                     public void onNext(Bitmap bitmap) {
                         mActivity.updateRecycleView(bitmap);
